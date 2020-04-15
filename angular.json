@@ -1,8 +1,124 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "auth-angular-component-demo": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/auth-angular-component-demo",
+      "sourceRoot": "projects/auth-angular-component-demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/auth-angular-component-demo",
+            "index": "projects/auth-angular-component-demo/src/index.html",
+            "main": "projects/auth-angular-component-demo/src/main.ts",
+            "polyfills": "projects/auth-angular-component-demo/src/polyfills.ts",
+            "tsConfig": "projects/auth-angular-component-demo/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/auth-angular-component-demo/src/favicon.ico",
+              "projects/auth-angular-component-demo/src/assets"
+            ],
+            "styles": ["projects/auth-angular-component-demo/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/auth-angular-component-demo/src/environments/environment.ts",
+                  "with": "projects/auth-angular-component-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "auth-angular-component-demo:build",
+            "proxyConfig": "proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "auth-angular-component-demo:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "auth-angular-component-demo:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/auth-angular-component-demo/src/test.ts",
+            "polyfills": "projects/auth-angular-component-demo/src/polyfills.ts",
+            "tsConfig": "projects/auth-angular-component-demo/tsconfig.spec.json",
+            "karmaConfig": "projects/auth-angular-component-demo/karma.conf.js",
+            "assets": [
+              "projects/auth-angular-component-demo/src/favicon.ico",
+              "projects/auth-angular-component-demo/src/assets"
+            ],
+            "styles": ["projects/auth-angular-component-demo/src/styles.scss"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/auth-angular-component-demo/tsconfig.app.json",
+              "projects/auth-angular-component-demo/tsconfig.spec.json",
+              "projects/auth-angular-component-demo/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/auth-angular-component-demo/e2e/protractor.conf.js",
+            "devServerTarget": "auth-angular-component-demo:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "auth-angular-component-demo:serve:production"
+            }
+          }
+        }
+      }
+    },
     "auth-angular-component": {
       "projectType": "application",
       "schematics": {
@@ -10,7 +126,7 @@
           "style": "scss"
         }
       },
-      "root": "",
+      "root": "src/auth-angular-component",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
@@ -23,13 +139,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -87,13 +198,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         },
@@ -105,9 +211,7 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
@@ -123,6 +227,128 @@
           }
         }
       }
-    }},
-  "defaultProject": "auth-angular-component"
+    },
+    "ngx-auth-component": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ngx-auth-component",
+      "sourceRoot": "projects/ngx-auth-component/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/ngx-auth-component",
+            "index": "projects/ngx-auth-component/src/index.html",
+            "main": "projects/ngx-auth-component/src/main.ts",
+            "polyfills": "projects/ngx-auth-component/src/polyfills.ts",
+            "tsConfig": "projects/ngx-auth-component/tsconfig.app.json",
+            "singleBundle": true,
+            "aot": true,
+            "assets": [
+              "projects/ngx-auth-component/src/favicon.ico",
+              "projects/ngx-auth-component/src/assets"
+            ],
+            "styles": ["projects/ngx-auth-component/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ngx-auth-component/src/environments/environment.ts",
+                  "with": "projects/ngx-auth-component/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "ngx-auth-component:build",
+            "port": 4300,
+            "singleBundle": true
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ngx-auth-component:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngx-auth-component:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/ngx-auth-component/src/test.ts",
+            "polyfills": "projects/ngx-auth-component/src/polyfills.ts",
+            "tsConfig": "projects/ngx-auth-component/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-auth-component/karma.conf.js",
+            "assets": [
+              "projects/ngx-auth-component/src/favicon.ico",
+              "projects/ngx-auth-component/src/assets"
+            ],
+            "styles": ["projects/ngx-auth-component/src/styles.scss"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-auth-component/tsconfig.app.json",
+              "projects/ngx-auth-component/tsconfig.spec.json",
+              "projects/ngx-auth-component/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ngx-auth-component/e2e/protractor.conf.js",
+            "devServerTarget": "ngx-auth-component:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ngx-auth-component:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "auth-angular-component",
+  "cli": {
+    "analytics": "e1b9d478-8975-41fa-b9cd-7537dca86312"
+  }
 }

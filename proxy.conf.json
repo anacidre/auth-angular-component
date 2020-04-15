@@ -1,0 +1,10 @@
+{
+  "/ngx-auth-component": {
+    "target": "http://localhost:4300",
+    "secure": false,
+    "pathRewrite": {
+      "^/ngx-auth-component": ""
+    },
+    "logLevel": "debug"
+  }
+}
